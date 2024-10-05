@@ -376,11 +376,12 @@ async function handleimage(req, res) {
     try {
         const user = req.user;
         const image_key = `IMG-${user._id}-${Date.now()}.jpg`;
+        const path=`images/${image_key}`
         const url = await putObjectimage(image_key, "image/jpg")
         const updateduser = await User.findByIdAndUpdate(user._id,
             {
                 $set: {
-                    profileimage: image_key,
+                    profileimage: path,
                 }
             }
             , { new: true })
@@ -396,11 +397,12 @@ async function updateresume(req, res) {
         const user = req.user;
 
         const resume_key = `file-${user._id}-${Date.now()}.pdf`;
+        const path_resume = `resume/${resume_key}`
         const resume_url = await putObjectresume(resume_key, "application/pdf")
         const updateduser = await User.findByIdAndUpdate(user._id,
             {
                 $set: {
-                    resume: resume_key,
+                    resume: path_resume,
                 }
             }
             , { new: true })
