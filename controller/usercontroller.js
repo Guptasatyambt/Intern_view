@@ -139,8 +139,8 @@ async function getinfo(req, res) {
         if (!user) {
             return res.status(404).json({ message: "No user found with this email" })
         }
-        const image_url = getobjecturlassets(user.profileimage)
-        const resume_url = getobjecturlassets(user.resume)
+        const image_url =await getobjecturlassets(user.profileimage)
+        const resume_url =await getobjecturlassets(user.resume)
         return res.status(200).json({ user, image: image_url, resume: resume_url });
     }
     catch (e) {
